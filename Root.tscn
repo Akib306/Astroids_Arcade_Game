@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddwxljg0r32n1"]
+
+[ext_resource type="Texture2D" uid="uid://dyo188tutvqkx" path="res://Assets/Player.png" id="1_7dxok"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_7dxok")
+
+[node name="Area2D" type="Area2D" parent="Player/PlayerSprite"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player/PlayerSprite/Area2D"]
+polygon = PackedVector2Array(0, -32, 32, 32, 0, 16, -32, 32)
+
+[node name="Camera2D" type="Camera2D" parent="."]
