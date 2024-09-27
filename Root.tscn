@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddwxljg0r32n1"]
+[gd_scene load_steps=3 format=3 uid="uid://ddwxljg0r32n1"]
 
 [ext_resource type="Texture2D" uid="uid://dyo188tutvqkx" path="res://Assets/Player.png" id="1_7dxok"]
+[ext_resource type="Script" path="res://player.gd" id="1_q1gjo"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -17,6 +18,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Player" type="Node2D" parent="."]
+script = ExtResource("1_q1gjo")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player"]
 texture = ExtResource("1_7dxok")
