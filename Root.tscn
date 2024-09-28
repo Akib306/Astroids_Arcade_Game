@@ -1,31 +1,44 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddwxljg0r32n1"]
 
-[ext_resource type="Texture2D" uid="uid://dyo188tutvqkx" path="res://Assets/Player.png" id="1_7dxok"]
-[ext_resource type="Script" path="res://player.gd" id="1_q1gjo"]
+[ext_resource type="Texture2D" uid="uid://diud1fggpmjc7" path="res://Assets/back_2.png" id="1_eaxpp"]
+[ext_resource type="PackedScene" uid="uid://dm3k8fek8io8h" path="res://player.tscn" id="2_r77ir"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-z_index = 1
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
-[node name="Player" type="Node2D" parent="."]
-script = ExtResource("1_q1gjo")
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 895.0
+offset_bottom = 888.0
+texture = ExtResource("1_eaxpp")
 
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
-texture = ExtResource("1_7dxok")
-
-[node name="Area2D" type="Area2D" parent="Player/PlayerSprite"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player/PlayerSprite/Area2D"]
-polygon = PackedVector2Array(0, -32, 32, 32, 0, 16, -32, 32)
+[node name="Player" parent="." instance=ExtResource("2_r77ir")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 1.52588e-05)
+scale = Vector2(4.26374, 3.0382)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 2060.0
+offset_top = 11.0
+offset_right = 2342.0
+offset_bottom = 162.0
+text = "Name: Akib, Motasin
+NSID: nzy764
+Student Number: 11369737
+"
+vertical_alignment = 1

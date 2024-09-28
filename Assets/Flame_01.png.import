@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0r5jrwlfkliy"
-path="res://.godot/imported/Lives.png-14e5e1460cc0d3e182c8d1b55d176cd2.ctex"
+uid="uid://f6e5f0vowie"
+path="res://.godot/imported/Flame_01.png-66bed5740562f1d5416467a781243c8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Lives.png"
-dest_files=["res://.godot/imported/Lives.png-14e5e1460cc0d3e182c8d1b55d176cd2.ctex"]
+source_file="res://Assets/Flame_01.png"
+dest_files=["res://.godot/imported/Flame_01.png-66bed5740562f1d5416467a781243c8a.ctex"]
 
 [params]
 

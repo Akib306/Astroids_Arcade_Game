@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Player
+
 @export var move_speed := 5.0
 
 # Called when the node enters the scene tree for the first time.

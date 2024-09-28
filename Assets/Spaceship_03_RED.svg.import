@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyo188tutvqkx"
-path="res://.godot/imported/Player.png-54d4b13ac506f96b99814af866f299ae.ctex"
+uid="uid://bolwn507hbojd"
+path="res://.godot/imported/Spaceship_03_RED.svg-7dca2a233091b9768fcbdc8729ae147d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player.png"
-dest_files=["res://.godot/imported/Player.png-54d4b13ac506f96b99814af866f299ae.ctex"]
+source_file="res://Assets/Spaceship_03_RED.svg"
+dest_files=["res://.godot/imported/Spaceship_03_RED.svg-7dca2a233091b9768fcbdc8729ae147d.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

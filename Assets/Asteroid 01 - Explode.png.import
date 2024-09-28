@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqg5xiwsckecs"
-path="res://.godot/imported/EngineThrottle.png-2bf19ca38f3abb42c2ba8ed17147f347.ctex"
+uid="uid://dspj4paflvnmy"
+path="res://.godot/imported/Asteroid 01 - Explode.png-19be65f6360d4ac90c11f6812094f620.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/EngineThrottle.png"
-dest_files=["res://.godot/imported/EngineThrottle.png-2bf19ca38f3abb42c2ba8ed17147f347.ctex"]
+source_file="res://Assets/Asteroid 01 - Explode.png"
+dest_files=["res://.godot/imported/Asteroid 01 - Explode.png-19be65f6360d4ac90c11f6812094f620.ctex"]
 
 [params]
 
