@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dm3k8fek8io8h"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_lb68p"]
-[ext_resource type="Texture2D" uid="uid://d00ji8ggimwnm" path="res://Assets/Spaceship_06_RED.png" id="2_ifmj3"]
+[ext_resource type="Texture2D" uid="uid://csp46ro050swk" path="res://Assets/Spaceship_RED.png" id="2_63nsr"]
 [ext_resource type="Texture2D" uid="uid://f6e5f0vowie" path="res://Assets/Flame_01.png" id="3_q3w25"]
 [ext_resource type="Texture2D" uid="uid://cqi3yq8ko7sxl" path="res://Assets/Flame_02.png" id="4_yn207"]
 
@@ -24,7 +24,7 @@ script = ExtResource("1_lb68p")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5185, 0.5145)
-texture = ExtResource("2_ifmj3")
+texture = ExtResource("2_63nsr")
 
 [node name="Area2D" type="Area2D" parent="PlayerSprite"]
 
