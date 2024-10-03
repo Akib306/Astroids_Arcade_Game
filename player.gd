@@ -3,11 +3,14 @@ extends Node2D
 class_name Player
 
 @export var rotation_speed := 5.0
-@export var bullet_scene = preload("res://bullet.tscn")  # Adjust path to your bullet scene
+@export var bullet_scene = preload("res://bullet.tscn")
 @export var velocity = Vector2.ZERO
 @export var acceleration = 150
 @export var deceleration = 100
+@export var max_velocity := 750  # Maximum velocity of the player's ship
 
+# Flag to track if the warp animation is playing
+var warp_animation_playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,21 +18,23 @@ func _ready() -> void:
 	$LeftThruster.visible = false
 	$RightThruster.visible = false
 	$MainThruster.visible = false
+	
+	$WarpAnimation.visible = false
+	# Connect the animation_finished signal
+	$WarpAnimation.frame_changed.connect(_on_WarpAnimation_frame_changed)
 
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Show the opposite thruster for the intended movement direction as per Newton's third law
 	if Input.is_action_pressed("ui_left"):
 		$RightThruster.visible = true  
 		$LeftThruster.visible = false  
-		
 	elif Input.is_action_pressed("ui_right"):
 		$LeftThruster.visible = true  
 		$RightThruster.visible = false 
-		
 	elif Input.is_action_pressed("ui_up"):
 		$MainThruster.visible = true
-
 	else:
 		# When no keys are pressed, hide the thrusters
 		$LeftThruster.visible = false
@@ -56,6 +61,10 @@ func _physics_process(delta: float) -> void:
 		# Apply thrust in the direction the ship is facing
 		var thrust = Vector2(0, -acceleration * delta).rotated(rotation)
 		velocity += thrust
+		
+		# Clamp the velocity to the max velocity
+		if velocity.length() > max_velocity:
+			velocity = velocity.normalized() * max_velocity
 
 	# Decelerate the ship when the DOWN arrow is pressed
 	if Input.is_action_pressed("ui_down"):
@@ -70,8 +79,8 @@ func _physics_process(delta: float) -> void:
 	# Apply velocity to the position of the ship
 	position += velocity * delta
 
-	# Handle screen wrapping after updating position
-	handle_screen_wrapping()
+	# Handle screen warping after updating position
+	handle_screen_warping()
 
 # Function to fire a bullet from the front of the ship
 func fire_bullet() -> void:
@@ -89,8 +98,8 @@ func fire_bullet() -> void:
 	# Add the bullet to the current scene (to the root or a specific node)
 	get_tree().root.add_child(bullet)
 	
-# Function to handle screen wrapping 
-func handle_screen_wrapping() -> void:
+# Function to handle screen warping 
+func handle_screen_warping() -> void:
 	var camera = get_viewport().get_camera_2d()
 	var viewport_size = get_viewport().get_visible_rect().size
 	var zoom = camera.zoom
@@ -115,17 +124,35 @@ func handle_screen_wrapping() -> void:
 	var max_y = camera_position.y + half_height
 
 	var new_position = position
+	var warped = false
 
-	# Wrap horizontally
+	# Warp horizontally
 	if position.x < min_x:
-		new_position.x = max_x
+		new_position.x = max_x - 1 
+		warped = true
 	elif position.x > max_x:
-		new_position.x = min_x
+		new_position.x = min_x + 1
+		warped = true
 
-	# Wrap vertically
+	# Warp vertically
 	if position.y < min_y:
-		new_position.y = max_y
+		new_position.y = max_y - 1
+		warped = true
 	elif position.y > max_y:
-		new_position.y = min_y
+		new_position.y = min_y + 1 
+		warped = true
 
-	position = new_position
+	# Update position and play the warp animation if warping occurred
+	if warped:
+		position = new_position
+		if not warp_animation_playing:
+			warp_animation_playing = true
+			$WarpAnimation.visible = true
+			$WarpAnimation.play("default")
+
+
+func _on_WarpAnimation_frame_changed():
+	if $WarpAnimation.frame == $WarpAnimation.sprite_frames.get_frame_count($WarpAnimation.animation) - 1:
+		warp_animation_playing = false
+		$WarpAnimation.visible = false
+		$WarpAnimation.stop()
