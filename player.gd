@@ -5,9 +5,8 @@ class_name Player
 @export var rotation_speed := 5.0
 @export var bullet_scene = preload("res://bullet.tscn")
 @export var velocity = Vector2.ZERO
-@export var acceleration = 150
-@export var deceleration = 100
-@export var max_velocity := 750  # Maximum velocity of the player's ship
+@export var bullet_recoil := 50  # Force applied to ship when firing a bullet
+@export var max_velocity := 200  # Maximum velocity of the player's ship
 
 # Flag to track if the warp animation is playing
 var warp_animation_playing = false
@@ -17,7 +16,6 @@ func _ready() -> void:
 	# Ensure all thrusters are initially not visible
 	$LeftThruster.visible = false
 	$RightThruster.visible = false
-	$MainThruster.visible = false
 	
 	$WarpAnimation.visible = false
 	# Connect the animation_finished signal
@@ -33,13 +31,10 @@ func _process(delta: float) -> void:
 	elif Input.is_action_pressed("ui_right"):
 		$LeftThruster.visible = true  
 		$RightThruster.visible = false 
-	elif Input.is_action_pressed("ui_up"):
-		$MainThruster.visible = true
 	else:
 		# When no keys are pressed, hide the thrusters
 		$LeftThruster.visible = false
 		$RightThruster.visible = false
-		$MainThruster.visible = false
 
 	# Handle firing bullets when SPACEBAR is pressed
 	if Input.is_action_just_pressed("ui_select"):  # ui_select is mapped to SPACEBAR by default
@@ -47,7 +42,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# writing to roation
-	# workaround to rebuild contacts due to scaling a collision body
 	self.rotation -= 0.0
 
 	if Input.is_action_pressed("ui_left"):
@@ -55,26 +49,6 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("ui_right"):
 		self.rotation += delta*rotation_speed
-	
-	# Accelerate the ship when the UP arrow is pressed
-	if Input.is_action_pressed("ui_up"):
-		# Apply thrust in the direction the ship is facing
-		var thrust = Vector2(0, -acceleration * delta).rotated(rotation)
-		velocity += thrust
-		
-		# Clamp the velocity to the max velocity
-		if velocity.length() > max_velocity:
-			velocity = velocity.normalized() * max_velocity
-
-	# Decelerate the ship when the DOWN arrow is pressed
-	if Input.is_action_pressed("ui_down"):
-		if velocity.length() > 0:
-			var deceleration_vector = -velocity.normalized() * deceleration * delta
-			# Only apply deceleration if it does not reverse direction
-			if deceleration_vector.length() > velocity.length():
-				velocity = Vector2.ZERO
-			else:
-				velocity += deceleration_vector
 
 	# Apply velocity to the position of the ship
 	position += velocity * delta
@@ -98,6 +72,10 @@ func fire_bullet() -> void:
 	# Add the bullet to the current scene (to the root or a specific node)
 	get_tree().root.add_child(bullet)
 	
+	# Apply recoil to the ship
+	var recoil = Vector2(0, bullet_recoil).rotated(rotation)
+	velocity += recoil
+
 # Function to handle screen warping 
 func handle_screen_warping() -> void:
 	var camera = get_viewport().get_camera_2d()
@@ -149,7 +127,6 @@ func handle_screen_warping() -> void:
 			warp_animation_playing = true
 			$WarpAnimation.visible = true
 			$WarpAnimation.play("default")
-
 
 func _on_WarpAnimation_frame_changed():
 	if $WarpAnimation.frame == $WarpAnimation.sprite_frames.get_frame_count($WarpAnimation.animation) - 1:

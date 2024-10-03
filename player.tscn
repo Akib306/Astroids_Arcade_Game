@@ -626,12 +626,6 @@ scale = Vector2(0.640094, 0.726529)
 sprite_frames = SubResource("SpriteFrames_bhwyc")
 autoplay = "default"
 
-[node name="MainThruster" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 74)
-scale = Vector2(0.640094, 0.726529)
-sprite_frames = SubResource("SpriteFrames_bhwyc")
-autoplay = "default"
-
 [node name="WarpAnimation" type="AnimatedSprite2D" parent="."]
 z_index = -1
 position = Vector2(4.76837e-07, 0)

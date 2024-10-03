@@ -33,12 +33,13 @@ position = Vector2(-1, 1.52588e-05)
 scale = Vector2(4.26374, 3.0382)
 
 [node name="Label" type="Label" parent="."]
-offset_left = 2060.0
-offset_top = 11.0
-offset_right = 2342.0
-offset_bottom = 162.0
+offset_left = 937.0
+offset_top = -718.0
+offset_right = 1266.0
+offset_bottom = -607.0
+theme_override_colors/font_color = Color(1, 0, 1, 0.498039)
+theme_override_font_sizes/font_size = 25
 text = "Name: Akib, Motasin
 NSID: nzy764
-Student Number: 11369737
-"
+Student Number: 11369737"
 vertical_alignment = 1
