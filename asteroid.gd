@@ -4,8 +4,8 @@ class_name asteroid
 
 @export var min_size := 2.0
 @export var max_size := 5.0
-@export var min_rotation_speed := -2.0
-@export var max_rotation_speed := 2.0
+@export var min_rotation_speed := -5.0
+@export var max_rotation_speed := 5.0
 @export var initial_velocity := Vector2.ZERO
 
 var rotation_speed := 0.0
