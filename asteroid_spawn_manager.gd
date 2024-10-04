@@ -3,7 +3,7 @@ extends Node2D
 class_name asteroid_spawn_manager
 
 @export var asteroid_scene = preload("res://asteroid.tscn")
-@export var spawn_interval := 2.0  # Time between spawns in seconds
+@export var spawn_interval := 3.0  # Time between spawns in seconds
 @export var spawn_distance := 50   # Distance outside the camera view to spawn asteroids
 @export var min_speed := 50        # Minimum speed of asteroids
 @export var max_speed := 150       # Maximum speed of asteroids
