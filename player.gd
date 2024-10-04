@@ -10,6 +10,7 @@ class_name Player
 
 # Flag to track if the warp animation is playing
 var warp_animation_playing = false
+var shooting_animation_playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,6 +21,11 @@ func _ready() -> void:
 	$WarpAnimation.visible = false
 	# Connect the animation_finished signal
 	$WarpAnimation.frame_changed.connect(_on_WarpAnimation_frame_changed)
+	
+	$ShootingAnimation.visible = false
+	# Connect the animation_finished signal for shooting animation
+	$ShootingAnimation.frame_changed.connect(_on_ShootingAnimation_frame_changed)
+
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,6 +81,12 @@ func fire_bullet() -> void:
 	# Apply recoil to the ship
 	var recoil = Vector2(0, bullet_recoil).rotated(rotation)
 	velocity += recoil
+	
+	# Play the shooting animation
+	if not shooting_animation_playing:
+		shooting_animation_playing = true
+		$ShootingAnimation.visible = true
+		$ShootingAnimation.play("default")
 
 # Function to handle screen warping 
 func handle_screen_warping() -> void:
@@ -133,3 +145,10 @@ func _on_WarpAnimation_frame_changed():
 		warp_animation_playing = false
 		$WarpAnimation.visible = false
 		$WarpAnimation.stop()
+
+# Called when the shooting animation frame changes
+func _on_ShootingAnimation_frame_changed():
+	if $ShootingAnimation.frame == $ShootingAnimation.sprite_frames.get_frame_count($ShootingAnimation.animation) - 1:
+		shooting_animation_playing = false
+		$ShootingAnimation.visible = false
+		$ShootingAnimation.stop()
