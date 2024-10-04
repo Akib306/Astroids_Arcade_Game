@@ -43,23 +43,59 @@ func _physics_process(delta: float) -> void:
 	# Rotate asteroid
 	rotation += rotation_speed * delta
 
-# Function to handle collision
 func _on_area_entered(area: Area2D) -> void:
-	# Check if the colliding area is a bullet and if the asteroid has not already been destroyed
 	if area is bullet and not is_destroyed:
 		is_destroyed = true  # Set flag to prevent further collisions
-
-		# Disable collision immediately to prevent further interactions
-		$CollisionPolygon2D.disabled = true
 
 		# Play explosion animation
 		play_explosion()
 
 		# Delete the bullet
 		area.queue_free()
-		
+
 		# Play explosion audio
 		$AsteroidExplosionAudio.play()
+		
+	elif area is player and not is_destroyed:
+		# Handle collision with the ship
+		var ship = area
+
+		# Positions
+		var x1 = position  # Asteroid's position
+		var x2 = ship.position  # Ship's position
+
+		# Velocities
+		var v1 = initial_velocity  # Asteroid's velocity
+		var v2 = ship.velocity  # Ship's velocity
+
+		# Masses (assuming both have mass 1)
+		var m1 = 1.0
+		var m2 = 1.0
+
+		# Collision normal
+		var n = (x1 - x2).normalized()
+
+		# Relative velocity
+		var vr = v1 - v2
+
+		# Relative velocity along the normal
+		var vn = vr.dot(n)
+
+		# If vn > 0, the objects are moving apart, no need to do anything
+		if vn > 0:
+			return
+
+		# Coefficient of restitution (1 for elastic collision)
+		var e = 1.0
+
+		# Compute impulse scalar
+		var j = -(1 + e) * vn / (1/m1 + 1/m2)
+
+		# Apply impulse to the asteroid's velocity
+		initial_velocity += (j / m1) * n
+
+		# Apply impulse to the ship's velocity
+		ship.velocity -= (j / m2) * n
 
 func play_explosion() -> void:
 	# Hide the asteroid's sprite
@@ -73,3 +109,18 @@ func _on_Explosion_animation_finished():
 	# Remove the asteroid after the explosion animation finishes
 	queue_free()
 	$ExplosionAnimation.visible = false
+
+# Function to calculate bounce off the player
+func _bounce_off_player(player_instance: player) -> void:
+	var normal = (global_position - player_instance.global_position).normalized()
+
+	# Reflect the velocities along the normal
+	initial_velocity = initial_velocity.bounce(normal)
+	player_instance.velocity = player_instance.velocity.bounce(-normal)
+
+	# Make sure velocities are clamped to max values if necessary
+	if initial_velocity.length() > max_rotation_speed:
+		initial_velocity = initial_velocity.normalized() * max_rotation_speed
+
+	if player_instance.velocity.length() > player_instance.max_velocity:
+		player_instance.velocity = player_instance.velocity.normalized() * player_instance.max_velocity
