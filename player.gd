@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Player
+class_name player
 
 @export var rotation_speed := 5.0
 @export var bullet_scene = preload("res://bullet.tscn")
