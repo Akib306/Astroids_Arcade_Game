@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://dm3k8fek8io8h"]
+[gd_scene load_steps=109 format=3 uid="uid://dm3k8fek8io8h"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_lb68p"]
 [ext_resource type="Texture2D" uid="uid://csp46ro050swk" path="res://Assets/Spaceship_RED.png" id="2_63nsr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cqi3yq8ko7sxl" path="res://Assets/Flame_02.png" id="4_yn207"]
 [ext_resource type="Texture2D" uid="uid://ci07wtgxtt13o" path="res://Assets/warpAnimation.png" id="5_p112b"]
 [ext_resource type="Texture2D" uid="uid://dbqgffd25fc2o" path="res://Assets/shooting animation.png" id="6_ukyk3"]
+[ext_resource type="AudioStream" uid="uid://drm1mbhocw2hv" path="res://Assets/BulletFireAudio.mp3" id="7_d12ll"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bhwyc"]
 animations = [{
@@ -758,3 +759,6 @@ z_index = -1
 position = Vector2(1.42109e-14, -71)
 scale = Vector2(1.71875, 1.65625)
 sprite_frames = SubResource("SpriteFrames_rgrg4")
+
+[node name="BulletFireAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_d12ll")

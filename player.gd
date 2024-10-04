@@ -8,7 +8,7 @@ class_name Player
 @export var bullet_recoil := 50  # Force applied to ship when firing a bullet
 @export var max_velocity := 200  # Maximum velocity of the player's ship
 
-# Flag to track if the warp animation is playing
+# Flags to track if animations are playing
 var warp_animation_playing = false
 var shooting_animation_playing = false
 
@@ -26,8 +26,6 @@ func _ready() -> void:
 	# Connect the animation_finished signal for shooting animation
 	$ShootingAnimation.frame_changed.connect(_on_ShootingAnimation_frame_changed)
 
-
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Show the opposite thruster for the intended movement direction as per Newton's third law
@@ -87,6 +85,10 @@ func fire_bullet() -> void:
 		shooting_animation_playing = true
 		$ShootingAnimation.visible = true
 		$ShootingAnimation.play("default")
+		
+	# Play the bullet firing sound
+	$BulletFireAudio.play()
+
 
 # Function to handle screen warping 
 func handle_screen_warping() -> void:
