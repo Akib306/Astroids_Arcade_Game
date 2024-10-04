@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://klao4u8aaqyo"]
+[gd_scene load_steps=13 format=3 uid="uid://klao4u8aaqyo"]
 
 [ext_resource type="Script" path="res://asteroid.gd" id="1_mskvf"]
 [ext_resource type="Texture2D" uid="uid://b17k0senb7c6e" path="res://Assets/Asteroid 01 - Base.png" id="2_0gjx8"]
 [ext_resource type="Texture2D" uid="uid://dspj4paflvnmy" path="res://Assets/Asteroid 01 - Explode.png" id="3_kiur6"]
+[ext_resource type="AudioStream" uid="uid://wasig111we6d" path="res://Assets/AsteroidExplosionAudio.mp3" id="4_b5gj3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r25kb"]
 atlas = ExtResource("3_kiur6")
@@ -73,3 +74,6 @@ polygon = PackedVector2Array(-9, -16, -9, -15, -11, -15, -11, -14, -13, -14, -13
 
 [node name="ExplosionAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rpuqo")
+
+[node name="AsteroidExplosionAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_b5gj3")

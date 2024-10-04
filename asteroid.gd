@@ -57,6 +57,9 @@ func _on_area_entered(area: Area2D) -> void:
 
 		# Delete the bullet
 		area.queue_free()
+		
+		# Play explosion audio
+		$AsteroidExplosionAudio.play()
 
 func play_explosion() -> void:
 	# Hide the asteroid's sprite
