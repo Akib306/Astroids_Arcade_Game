@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://dm3k8fek8io8h"]
+[gd_scene load_steps=115 format=3 uid="uid://dm3k8fek8io8h"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_lb68p"]
 [ext_resource type="Texture2D" uid="uid://csp46ro050swk" path="res://Assets/Spaceship_RED.png" id="2_63nsr"]
@@ -7,6 +7,43 @@
 [ext_resource type="Texture2D" uid="uid://ci07wtgxtt13o" path="res://Assets/warpAnimation.png" id="5_p112b"]
 [ext_resource type="Texture2D" uid="uid://dbqgffd25fc2o" path="res://Assets/shooting animation.png" id="6_ukyk3"]
 [ext_resource type="AudioStream" uid="uid://drm1mbhocw2hv" path="res://Assets/BulletFireAudio.mp3" id="7_d12ll"]
+[ext_resource type="Texture2D" uid="uid://dh1qa7alfshw5" path="res://Assets/sparks.png" id="8_jsntm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_src4y"]
+atlas = ExtResource("8_jsntm")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uamgo"]
+atlas = ExtResource("8_jsntm")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xlvc"]
+atlas = ExtResource("8_jsntm")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8csk"]
+atlas = ExtResource("8_jsntm")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lu0ik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_src4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uamgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xlvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8csk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_41wlw"]
 atlas = ExtResource("5_p112b")
@@ -728,6 +765,12 @@ animations = [{
 scale = Vector2(0.5185, 0.5145)
 collision_mask = 2
 script = ExtResource("1_lb68p")
+
+[node name="CollisionSparks" type="AnimatedSprite2D" parent="."]
+z_index = 2
+scale = Vector2(9.59047, 8.19212)
+sprite_frames = SubResource("SpriteFrames_lu0ik")
+autoplay = "default"
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_63nsr")

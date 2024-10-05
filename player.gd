@@ -11,6 +11,7 @@ class_name player
 # Flags to track if animations are playing
 var warp_animation_playing = false
 var shooting_animation_playing = false
+var sparks_animation_playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,6 +26,16 @@ func _ready() -> void:
 	$ShootingAnimation.visible = false
 	# Connect the animation_finished signal for shooting animation
 	$ShootingAnimation.frame_changed.connect(_on_ShootingAnimation_frame_changed)
+	
+	# Ensure CollisionSparks is initially hidden
+	$CollisionSparks.visible = false
+
+	# Connect the area_entered signal
+	area_entered.connect(_on_player_area_entered)
+
+	# Connect the animation_finished signal for CollisionSparks
+	$CollisionSparks.animation_finished.connect(_on_CollisionSparks_animation_finished)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -154,3 +165,15 @@ func _on_ShootingAnimation_frame_changed():
 		shooting_animation_playing = false
 		$ShootingAnimation.visible = false
 		$ShootingAnimation.stop()
+
+func _on_player_area_entered(area: Area2D) -> void:
+	if area is asteroid:
+		# Play CollisionSparks animation
+		if not sparks_animation_playing:
+			sparks_animation_playing = true
+			$CollisionSparks.visible = true
+			$CollisionSparks.play("default")  
+
+func _on_CollisionSparks_animation_finished():
+	sparks_animation_playing = false
+	$CollisionSparks.visible = false
