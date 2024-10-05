@@ -1,0 +1,135 @@
+commit 28552f3bcdd5faf4703c39cb1cc5d20800b237ac
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 22:46:23 2024 -0600
+
+    Added feature: When an asteroid is hit, spawn two smaller asteroids each half the size (and completely remove the asteroid if too small).
+
+commit ac29cdda263ee260271d35269b410424bc67914c
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 22:28:37 2024 -0600
+
+    Added feature: If the healthbar is empty, the ship is destroyed, and the scene is reloaded after waiting one second.
+
+commit 3be39213cb9b41c78e9a22458602e166e81d6745
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 21:02:12 2024 -0600
+
+    Added feature: A death animation on the player ship is played when player health reaches 0.
+
+commit 4721daf17e990fe2e73fd7b25a3751eb51dcb462
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 20:24:11 2024 -0600
+
+    Added feature: In the top left corner of the screen is a healthbar. The healthbar decreases when an asteroid hits the player ship.
+
+commit c585d19f1517c4fbc45bf1481550f8df8fa432ce
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 19:17:48 2024 -0600
+
+    Added feature: An annoying sound is played when the player ship and an asteroid collide.
+
+commit b1f9e273b5b7653e23eefbb655bf6d7936075d22
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 18:41:09 2024 -0600
+
+    Added feature: Particles are emitted from the player ship (sparks/fire showing damage) when hit by an asteroid.
+
+commit fe5ded6aeb5c6ad0184d49ce10a29577711fafb5
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 14:28:01 2024 -0600
+
+    Added feature: The asteroid and ship bounce off each other.
+
+commit 4edc13d5723122712004419181f92c6df1e6d81f
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 10:41:39 2024 -0600
+
+    Added feature: Play an explosion sound when an asteroid is destroyed by a bullet.
+
+commit e09f1429fb87258550ff9421021e211373489e9e
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Oct 4 10:16:56 2024 -0600
+
+    Added feature: Asteroids are destroyed if hit by a bullet.
+
+commit ce45d62a99b2e2aa6d345b2914a6b9222f8ce0c8
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Thu Oct 3 20:58:22 2024 -0600
+
+    Added feature: Asteroids have randomized rotational speeds (they spin).
+
+commit e53812ea3b7655c612a89810dcd4bbf2c36a2172
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Thu Oct 3 20:55:17 2024 -0600
+
+    Added feature: Asteroids have randomized sizes.
+
+commit 53ce6b28004f1147833b7182c9d87f3c00e2c4af
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Thu Oct 3 20:50:08 2024 -0600
+
+    Added feature: Asteroids are periodically spawned outside the camera view, and given a RANDOMIZED initial velocity roughly towards the centre of the screen.
+
+commit 96de0de8a722c4dc2ef565d0186c5103bce4b603
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Thu Oct 3 19:45:28 2024 -0600
+
+    Added feature: Bullet firing audio.
+    Also, just to note, the feature 'The bullet moves forward, and is removed after a few seconds (if it doesn’t hit something first)' was already added in this commit: 'dbc6ca3d8a81a3a0fc797857b91e076fa5639799'
+
+commit 9b083cd9470360b9eb9a9325a09ec33dd09b3166
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Thu Oct 3 18:14:28 2024 -0600
+
+    Added feature: Player ship plays a shooting animation that has 1 frame.
+
+commit d4b3983077234661c5a640cd6eba579aeb17bfec
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Thu Oct 3 11:56:41 2024 -0600
+
+    Added feature: Player ship is pushed BACKWARDS. Player ship drifts in space. It never slows down on its own. The only way to change the VELOCITY of the ship is to fire a bullet (adding a BACKWARDS force).
+    Removed main thrusters, increasing velocity with UP arrow, and decreasing velocity with DOWN arrow.
+
+commit 2f262b79603526a155bb08710d84e4fc95f90c34
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Wed Oct 2 21:48:15 2024 -0600
+
+    Added feature: When the player ship is warped to the opposite side of the screen, play a warp animation at least 3 frames long on the ship.
+    Also, added a maximum velocity limit on the player ship.
+
+commit c0b61fdd866ceeb356fa16dc7382b702bc03ed4f
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Tue Oct 1 19:26:42 2024 -0600
+
+    Added feature: When the player ship exits the view of the camera, it is moved to the OPPOSITE side of the camera view (and retains its current velocity).
+    Added feature: Pressing UP arrow increases player ship velocity and acceleration starting from 0 and pressing DOWN arrow makes player ship decelerate until velocity = 0.
+
+commit dbc6ca3d8a81a3a0fc797857b91e076fa5639799
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Tue Oct 1 15:46:33 2024 -0600
+
+    Added feature: Pressing SPACEBAR fires a bullet from the front of the player ship.
+
+commit ead6c331c0f2a96285763c9ade8b318126fd4549
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Mon Sep 30 22:20:34 2024 -0600
+
+    Added feature: When pressing LEFT ARROW or RIGHT ARROW (rotating left/right), plays an animation at least 3 frames long showing the ship using sideways thrusters.
+
+commit e82a7eecd0358286d0a359ea0eb345d247450cc7
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Sep 27 23:54:11 2024 -0600
+
+    Switched to a more colorful asset pack. Added my name, nsid, and student number to the top right.
+
+commit f398b982ac12ddd52d3e2cd8cdf81cd1ae33c0d4
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Fri Sep 27 11:45:19 2024 -0600
+
+    Added movement: Holding LEFT ARROW or RIGHT ARROW keys rotates the ship(player).
+
+commit 11158b75bccd4286034b5072f8a71d3acb37a8da
+Author: Akib306 <123131218+Akib306@users.noreply.github.com>
+Date:   Thu Sep 26 22:37:54 2024 -0600
+
+    Initial commit, setup root scene with player, background, and the camera2d.
