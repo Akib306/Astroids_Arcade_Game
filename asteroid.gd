@@ -8,6 +8,8 @@ class_name asteroid
 @export var max_rotation_speed := 5.0
 @export var initial_velocity := Vector2.ZERO
 
+@export var asteroid_scene = preload("res://asteroid.tscn")  # Preload the asteroid scene for instantiation
+
 var rotation_speed := 0.0
 var is_destroyed := false  # Flag to prevent multiple destructions
 
@@ -55,6 +57,20 @@ func _on_area_entered(area: Area2D) -> void:
 
 		# Play explosion audio
 		$AsteroidExplosionAudio.play()
+		
+		# Determine if the asteroid should split
+		var current_size = scale.x  # Assuming uniform scaling
+		var new_size = current_size / 2.0
+
+		if new_size >= min_size:
+			# Spawn two smaller asteroids
+			for i in range(2):
+				var new_asteroid = asteroid_scene.instantiate()
+				new_asteroid.scale = Vector2(new_size, new_size)
+				new_asteroid.initial_velocity = calculate_new_velocity(i, new_size)
+				new_asteroid.position = position  # Spawn at the same position
+				get_parent().add_child(new_asteroid)
+		# If the asteroid is too small, it won't split and will be removed completely
 		
 	elif area is player and not is_destroyed:
 		# Handle collision with the ship
@@ -124,3 +140,10 @@ func _bounce_off_player(player_instance: player) -> void:
 
 	if player_instance.velocity.length() > player_instance.max_velocity:
 		player_instance.velocity = player_instance.velocity.normalized() * player_instance.max_velocity
+
+# Function to calculate new velocity for the spawned asteroids
+func calculate_new_velocity(index: int, new_size: float) -> Vector2:
+	# Determine a direction based on the index to ensure asteroids move apart
+	var angle_offset_degrees = 30.0 * (1 if index == 0 else -1)  # 30 degrees to the left and right
+	var angle_offset = deg_to_rad(angle_offset_degrees)
+	return initial_velocity.rotated(angle_offset).normalized() * initial_velocity.length()
