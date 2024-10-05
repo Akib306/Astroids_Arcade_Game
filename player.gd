@@ -173,6 +173,8 @@ func _on_player_area_entered(area: Area2D) -> void:
 			sparks_animation_playing = true
 			$CollisionSparks.visible = true
 			$CollisionSparks.play("default")  
+		
+			$CollisionAudio.play()
 
 func _on_CollisionSparks_animation_finished():
 	sparks_animation_playing = false
