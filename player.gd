@@ -16,6 +16,9 @@ var warp_animation_playing = false
 var shooting_animation_playing = false
 var sparks_animation_playing = false
 
+# Timer for reloading the scene after destruction
+var reload_timer: Timer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Ensure all thrusters are initially not visible
@@ -44,7 +47,12 @@ func _ready() -> void:
 	# Connect the animation_finished signal for DeathAnimation
 	$DeathAnimation.animation_finished.connect(_on_DeathAnimation_animation_finished)
 
-
+	# Initialize the reload_timer
+	reload_timer = Timer.new()
+	reload_timer.wait_time = 1.0  # Wait for 1 second
+	reload_timer.one_shot = true
+	reload_timer.connect("timeout", Callable(self, "_on_ReloadTimer_timeout"))
+	add_child(reload_timer)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -204,12 +212,26 @@ func _on_player_area_entered(area: Area2D) -> void:
 			$PlayerSprite.visible = false
 			$DeathAnimation.visible = true
 			$DeathAnimation.play("default")
+			
+			
+
 
 func _on_CollisionSparks_animation_finished():
 	sparks_animation_playing = false
 	$CollisionSparks.visible = false
 
+
 # Called when the death animation finishes
 func _on_DeathAnimation_animation_finished():
-	# Stop the game or handle game-over logic
-	queue_free()  # Removes the player from the scene
+	# Start the reload timer
+	if not reload_timer.is_connected("timeout", Callable(self, "_on_ReloadTimer_timeout")):
+		reload_timer.connect("timeout", Callable(self, "_on_ReloadTimer_timeout"))
+	reload_timer.start()
+	# Optionally, hide the player or perform additional cleanup
+	# $PlayerSprite.queue_free()  # Uncomment if you want to remove the sprite
+	
+# Callback function for the reload timer
+func _on_ReloadTimer_timeout():
+	# Reload the current scene
+	print("Reloading scene...")
+	get_tree().reload_current_scene()
