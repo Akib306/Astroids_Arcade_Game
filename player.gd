@@ -38,6 +38,12 @@ func _ready() -> void:
 
 	# Connect the animation_finished signal for CollisionSparks
 	$CollisionSparks.animation_finished.connect(_on_CollisionSparks_animation_finished)
+	
+	# Ensure DeathAnimation is initially hidden
+	$DeathAnimation.visible = false
+	# Connect the animation_finished signal for DeathAnimation
+	$DeathAnimation.animation_finished.connect(_on_DeathAnimation_animation_finished)
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -190,7 +196,20 @@ func _on_player_area_entered(area: Area2D) -> void:
 			$CollisionSparks.play("default")  
 		
 			$CollisionAudio.play()
+		
+		$CollisionAudio.play()
+		
+		# Play death animation if health reaches 0
+		if health == 0:
+			$PlayerSprite.visible = false
+			$DeathAnimation.visible = true
+			$DeathAnimation.play("default")
 
 func _on_CollisionSparks_animation_finished():
 	sparks_animation_playing = false
 	$CollisionSparks.visible = false
+
+# Called when the death animation finishes
+func _on_DeathAnimation_animation_finished():
+	# Stop the game or handle game-over logic
+	queue_free()  # Removes the player from the scene
