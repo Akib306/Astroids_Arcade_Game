@@ -7,6 +7,9 @@ class_name player
 @export var velocity = Vector2.ZERO
 @export var bullet_recoil := 50  # Force applied to ship when firing a bullet
 @export var max_velocity := 200  # Maximum velocity of the player's ship
+@export var max_health := 100  # Maximum health of the player's ship
+
+var health := max_health  # Current health of the player's ship
 
 # Flags to track if animations are playing
 var warp_animation_playing = false
@@ -54,6 +57,10 @@ func _process(delta: float) -> void:
 	# Handle firing bullets when SPACEBAR is pressed
 	if Input.is_action_just_pressed("ui_select"):  # ui_select is mapped to SPACEBAR by default
 		fire_bullet()
+		
+	# Update health bar value
+	$"../Control/HealthBar".value = health
+	
 
 func _physics_process(delta: float) -> void:
 	# writing to roation
@@ -168,6 +175,14 @@ func _on_ShootingAnimation_frame_changed():
 
 func _on_player_area_entered(area: Area2D) -> void:
 	if area is asteroid:
+		# Reduce health
+		health -= 20
+		if health < 0:
+			health = 0
+
+		# Update the health bar
+		$"../Control/HealthBar".value = health
+
 		# Play CollisionSparks animation
 		if not sparks_animation_playing:
 			sparks_animation_playing = true

@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddwxljg0r32n1"]
+[gd_scene load_steps=7 format=3 uid="uid://ddwxljg0r32n1"]
 
 [ext_resource type="Texture2D" uid="uid://diud1fggpmjc7" path="res://Assets/back_2.png" id="1_eaxpp"]
 [ext_resource type="PackedScene" uid="uid://dm3k8fek8io8h" path="res://player.tscn" id="2_r77ir"]
 [ext_resource type="Script" path="res://asteroid_spawn_manager.gd" id="3_qf26e"]
+
+[sub_resource type="Theme" id="Theme_ujjtb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btktm"]
+bg_color = Color(1, 0, 0.0156863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6evr"]
+bg_color = Color(0, 1, 0, 1)
 
 [node name="Node2D" type="Node2D"]
 
@@ -47,3 +55,21 @@ vertical_alignment = 1
 
 [node name="AsteroidSpawnManager" type="Node2D" parent="."]
 script = ExtResource("3_qf26e")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ujjtb")
+
+[node name="HealthBar" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = -1249.0
+offset_top = -701.0
+offset_right = -970.0
+offset_bottom = -646.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/background = SubResource("StyleBoxFlat_btktm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y6evr")
